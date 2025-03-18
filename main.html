@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Of Iloilo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; 
+      flex-direction: column;
+      background-color: #f5f5f5;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #2f4f2f; 
+      padding: 1.5rem;
+      color: white;
+      text-align: center;
+      position: relative;
+      width: 100%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    .logo {
+      position: absolute;
+      top: 30%;
+      left: 300px;
+      width: 60px;
+      transform: translateY(-50%);
+      background: none;
+    }
+    .logout {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      color: #2f4f2f;
+      background-color: white;
+      border: 2px solid #2f4f2f;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px; 
+      transform: translateY(-50%);
+      transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+    }
+    .logout:hover {
+      background-color: #2f4f2f;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .nav-links a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 10px 15px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .nav-links a:hover {
+      background-color: #3e6b3e;
+      color: white;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh; 
+      width: 100%;
+      padding: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .content h1 {
+      color: #2f4f2f;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+    .content p {
+      color: #555;
+      line-height: 1.6;
+    }
+    .circle-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: jumpImage 1s infinite alternate;
+    }
+
+    @keyframes jumpImage {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-20px);
+      }
+    }
+    footer {
+      background-color: #2f4f2f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      width: 100%;
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .container {
+        position: relative;
+        display: inline-block;
+      }
+      .logo {
+        transform: none;
+        position: relative;
+        left: 0;
+      }
+      .logout {
+        transform: none;
+        position: relative;
+        top: 10px;
+        right: 10px;
+      }
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+    .sidebar {
+      background-color: #2f4f2f; 
+      width: 250px;
+      color: white;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: -250px; 
+      height: 100%;
+      transition: left 0.3s ease-in-out; 
+      z-index: 1000;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .sidebar.visible {
+      left: 0;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      border-bottom: 1px solid white;
+      padding-bottom: 10px;
+    }
+    .sidebar button {
+      width: 100%; 
+      background-color: transparent; 
+      color: white;
+      border: none; 
+      padding: 15px;
+      margin: 10px 0;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-align: left; 
+      transition: color 0.3s; 
+    }
+    .sidebar button:hover {
+      color: #3e6b3e; 
+    }
+    .toggle-sidebar-btn {
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      position: absolute; 
+      top: -20px;
+      right: -200px; 
+      background: none; 
+    }
+    .toggle-sidebar-btn::after {
+      content: '✖'; 
+    }
+    .show-sidebar-btn {
+      position: fixed; 
+      top: 20px; 
+      left: 20px; 
+      background-color: transparent; 
+      color: white;
+      border: none;
+      padding: 15px 25px; 
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1001;
+      font-size: 1.5rem; 
+    }
+    .show-sidebar-btn:hover {
+      background-color: transparent; 
+      box-shadow: none; 
+      transform: none; 
+    }
+    .show-sidebar-btn::after {
+      content: '☰';
+    }
+    .sidebar.visible ~ .show-sidebar-btn {
+      display: none;
+    }
+    .content-section {
+      display: none;
+      padding: 20px;
+    }
+    .content-section img {
+      margin-right: 20px;
+    }
+    .content-section h2 {
+      margin-bottom: 20px;
+    }
+    .content-section p {
+      text-align: justify;
+    }
+    .events-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .event-item {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .event-date {
+      font-weight: bold;
+      color: #2f4f2f;
+    }
+    .event-description {
+      margin-top: 5px;
+      color: #555;
+    }
+    .officers-section {
+      margin-top: 20px;
+    }
+    .officer-item {
+      margin-bottom: 10px;
+    }
+    .officer-title {
+      font-weight: bold;
+      color: #2f4f2f;
+    }
+    .officer-name {
+      color: #555;
+    }
+    .next-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      background-color: #2f4f2f;
+      color: white;
+    }
+    .next-button:hover {
+      background-color: #3e6b3e;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .event-dropdown {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      border: 1px solid #2f4f2f;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      background-color: white;
+      color: #2f4f2f;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      top: -233em;
+      left: 30em;
+    }
+    .event-dropdown:hover {
+      background-color: #f5f5f5;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .back-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      border: 1px solid #2f4f2f;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      background-color: white;
+      color: #2f4f2f;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      left: 35em;
+      top: -3em;
+    }
+    .back-button:hover {
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.getElementById(sectionId).style.display = 'block';
+
+      document.querySelectorAll('.event-dropdown').forEach(dropdown => {
+        dropdown.style.display = 'block';
+      });
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('visible');
+      const showButton = document.querySelector('.show-sidebar-btn');
+      if (sidebar.classList.contains('visible')) {
+        showButton.style.display = 'none';
+      } else {
+        showButton.style.display = 'block';
+      }
+    }
+
+    function showSindayawDetails(type) {
+      document.querySelectorAll('#sinda-section .details').forEach(detail => {
+        detail.style.display = 'none';
+      });
+      document.getElementById(`sinda-${type}`).style.display = 'block';
+    }
+
+    function showNextEvents() {
+      showSection('smhap-events-section');
+    }
+
+    function showNextSMHAPEvents() {
+      showSection('scimat-events-section');
+    }
+
+    function showNextOrganization(currentSection) {
+      const sections = [
+        'col-section',
+        'smhap-section',
+        'scimat-section',
+        'bus-cata-section',
+        'scaena-section',
+        'sinda-section',
+        'sinag-section'
+      ];
+      const currentIndex = sections.indexOf(currentSection);
+      const nextIndex = (currentIndex + 1) % sections.length;
+      showSection(sections[nextIndex]);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.querySelectorAll('#sinda-section .details').forEach(detail => {
+        detail.style.display = 'none';
+      });
+      showSection('home-section'); 
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <img src="https://ui.phinma.edu.ph/wp-content/uploads/2023/04/University-of-Iloilo.png" alt="University of Iloilo Logo" class="logo">
+    <h1>PHINMA - UNIVERSITY OF ILOILO</h1>
+    <div class="nav-links">
+      <a href="javascript:void(0);" onclick="showSection('col-section')">COL</a>
+      <a href="javascript:void(0);" onclick="showSection('smhap-section')">SMHAP</a>
+      <a href="javascript:void(0);" onclick="showSection('scimat-section')">SCIMATH</a> 
+      <a href="javascript:void(0);" onclick="showSection('bus-cata-section')">BUSINESS CATALYST</a>
+      <a href="javascript:void(0);" onclick="showSection('scaena-section')">SCAENA EXCELSIOR</a> 
+      <a href="javascript:void(0);" onclick="showSection('sinda-section')">SINDAYAW</a> 
+      <a href="javascript:void(0);" onclick="showSection('sinag-section')">SINAG GLEE</a>
+    </div>
+  </header>
+  <button class="show-sidebar-btn" onclick="toggleSidebar()"></button>
+  <aside class="sidebar">
+    <button class="toggle-sidebar-btn" onclick="toggleSidebar()"></button>
+    <h2>Menu</h2>
+    <button onclick="showSection('home-section')">Home</button>
+    <button onclick="showSection('history-section')">History</button>
+    <button onclick="showSection('events-section')">Events</button>
+    <button onclick="showSection('about-us-section')">About Us</button>
+    <button onclick="showSection('link-section')">Page Organization</button>  
+    <button onclick="window.location.href='login.html'">Logout</button>
+    
+  </aside>
+  <div class="container">
+    <main class="content">
+      <div id="home-section" class="content-section" style="display: none;">
+        <h2>Welcome to PHINMA - University of Iloilo</h2>
+        <p>Welcome to the official website of PHINMA - University of Iloilo. Discover our programs, events, and more.</p>
+      </div>
+      <div id="col-section" class="content-section" style="display: none;">
+        <div style="display: flex; align-items: center;">
+          <img src="col.png" alt="Council of Leaders Image" class="circle-image">
+          <h2>COUNCIL OF LEADERS</h2>
+        </div>
+        <p>The Council of Leaders is a dynamic student-led organization within the Senior High School (SHS) Department of PHINMA – University of Iloilo. For the past four years, it has been at the forefront of fostering leadership, collaboration, and student engagement. As the primary governing body representing senior high school students, it ensures their voices are heard and organizes impactful school-wide events and initiatives.</p>
+        <p>Founded by visionary educators Sir Czar Oneill Pamplona and Ma’am Lynie Aguirre, the Council of Leaders was created to provide a platform for student leaders to develop their skills, take on responsibilities, and contribute to a vibrant and inclusive school environment. Their collaboration led to the establishment of structured leadership programs, student-led projects, and various extracurricular activities that continue to shape the SHS community today.</p>
+        <p>Since its inception, the Council of Leaders has played a crucial role in planning and executing major school events, including academic competitions, leadership training sessions, outreach programs, and student engagement activities. It also serves as a bridge between students and faculty, addressing student concerns and promoting a culture of responsibility, teamwork, and excellence.</p>
+        <p>Over the years, the council has evolved, with each batch of student leaders bringing fresh ideas while upholding the core values established by its founders. Today, the Council of Leaders of the SHS Department of PHINMA – University of Iloilo remains a vital institution, continuously empowering students to develop their leadership potential and actively participate in shaping their school community.</p>
+      </div>
+      <div id="smhap-section" class="content-section" style="display: none;">
+        <div style="display: flex; align-items: center;">
+          <img src="SMHAP.png" alt="SMHAP Image" class="circle-image">
+          <h2>SMHAP</h2>
+        </div>
+        <p>Established on August 7, 2023, SMHAP is the official student organization for the Humanities and Social Sciences (HUMS) strand at PHINMA University of Iloilo SHS Department. We are thrilled to welcome our Technical-Vocational Livelihood (TVL) and General Academic Strand (GAS) students to this vibrant community. As you embark on this exciting journey, SMHAP is here to support you in this new chapter of your Senior High School life.</p>
+      </div>
+      <div id="scimat-section" class="content-section" style="display: none;">
+        <div style="display: flex; align-items: center;">
+          <img src="sci-math.png" alt="SCIMATH Image" class="circle-image"> <!-- Added image -->
+          <h2 style="margin-left: 20px;">SCIMATH</h2>
+        </div>
+        <p>SciMath was established on August 9, 2023, with the mission of fueling curiosity, sparking conversation, and pushing the boundaries of scientific and mathematical knowledge. As the official Science and Mathematics organization of the PHINMA University of Iloilo Senior High School Department, SciMath serves as a hub for students passionate about exploring the wonders of science and the logic of mathematics.</p>
+        <p>The organization provides a platform for intellectually curious students to engage in hands-on experiments, mathematical problem-solving, research initiatives, and academic competitions. Through workshops, seminars, and interactive activities, SciMath aims to cultivate analytical thinking, innovation, and a deep appreciation for the role of science and mathematics in everyday life.</p>
+        <p>Beyond academics, SciMath fosters collaboration and critical thinking, encouraging members to question, explore, and seek solutions to real-world challenges. Whether you're drawn to scientific discoveries, mathematical theories, or technological advancements, SciMath provides an environment where students can expand their knowledge, challenge their perspectives, and develop skills essential for future careers in STEM fields.</p>
+        <p>Join us in uncovering the mysteries of the universe, solving complex equations, and celebrating the beauty of logic and discovery. With SciMath, the pursuit of knowledge never ends it only grows stronger.</p>
+      </div>
+      <div id="bus-cata-section" class="content-section" style="display: none;">
+        <div style="display: flex; align-items: center;">
+          <img src="Business Catalyst.png" alt="BUSINESS CATALYST Image" class="circle-image"> <!-- Added image -->
+          <h2 style="margin-left: 20px;">BUSINESS CATALYST</h2>
+        </div>
+        <p>The Business Expo 2023, titled "The Starters," was officially launched on August 7, 2023, captivating the entire PHINMA University of Iloilo community with its extravagant display and diverse array of innovative products. This highly anticipated event served as a platform for student exhibitors from various academic strands to showcase their entrepreneurial skills, creativity, and business acumen.</p>
+        <p>The expo highlighted a wide selection of distinctive and inventive products, ranging from handcrafted goods and fashion items to cutting-edge technology and sustainable solutions. Each booth reflected the dedication and ingenuity of the participating students, demonstrating their ability to conceptualize, develop, and present marketable products.</p>
+        <p>Beyond the product showcases, "The Starters" also featured engaging activities such as live product demonstrations, business pitching sessions, and interactive discussions with industry experts and mentors. These activities provided students with valuable insights into entrepreneurship, marketing strategies, and financial management, equipping them with real-world skills essential for future business ventures.</p>
+        <p>Faculty members, school administrators, and guests expressed their admiration for the students' entrepreneurial spirit, acknowledging the event as a testament to PHINMA University of Iloilo's commitment to fostering innovation, leadership, and business excellence.</p>
+        <p>Through "The Starters," the Business Expo 2023 successfully bridged the gap between education and enterprise, allowing students to experience the realities of business while inspiring them to pursue their entrepreneurial aspirations. The event not only celebrated student talent but also reinforced the importance of creativity, collaboration, and resilience in the ever-evolving world of business.</p>
+      </div>  
+      <div id="scaena-section" class="content-section" style="display: none;">
+        <div style="display: flex; align-items: center;">
+          <img src="Scaena Excelsior.png" alt="SCAENA EXCELSIOR Image" class="circle-image"> <!-- Added image -->
+          <h2 style="margin-left: 20px;">SCAENA EXCELSIOR</h2>
+        </div>
+        <p>Scaena Excelsior was established on August 9, 2023, as the official drama club of the PHINMA University of Iloilo Basic Education Department – Senior High School. It serves as a vibrant and inclusive community where creativity takes center stage, providing students with a platform to express themselves through the performing arts.</p>
+        <p>The club welcomes budding actors, directors, playwrights, and stage enthusiasts alike, fostering a supportive environment where members can develop their theatrical skills, confidence, and artistic vision. Through stage performances, scriptwriting workshops, and immersive acting exercises, Scaena Excelsior nurtures talent and encourages self-expression.</p>
+        <p>Beyond performances, the drama club promotes teamwork, discipline, and storytelling, allowing students to explore different perspectives and emotions through acting. Whether you're stepping onto the stage for the first time or honing your craft, Scaena Excelsior provides opportunities to grow and shine in the world of theater.</p>
+        <p>Join us in bringing stories to life, embracing creativity, and making every performance an unforgettable experience. The stage is yours step into the spotlight with Scaena Excelsior!</p>
+      </div>
+      <div id="sinda-section" class="content-section" style="display: none;">
+        <div style="display: flex; align-items: center;">
+          <img src="Sindayaw.png" alt="SINDAYAW Image" class="circle-image">
+          <h2 style="margin-left: 20px;">SINDAYAW</h2>
+        </div>
+        <p>On August 19, 2023, the Official Dance Troupe of PHINMA University of Iloilo SHS Department—Sindayaw—was officially established. This dynamic dance ensemble serves as a platform for passionate and talented students to embrace their love for dance, refine their skills, and showcase their talents on stage.</p>
+        <p>Sindayaw provides a space where students can unlock their full potential, turning their passion for dance into captivating performances. Whether through contemporary, hip-hop, cultural, or modern choreography, members of the troupe are encouraged to express themselves artistically while developing discipline, teamwork, and confidence.</p>
+        <p>By joining this prestigious dance ensemble, students become part of a community that nurtures talent, fosters dedication, and creates a legacy of outstanding performances. Every movement and performance is a testament to the hard work, creativity, and perseverance of its members.</p>
+        <p>As the official dance company of PHINMA University of Iloilo SHS Department, Sindayaw continues to uplift the school’s cultural and artistic spirit, delivering electrifying performances that leave a lasting impact.</p>
+        <p>To all aspiring dancers—this is your time to shine. Let go of hesitation and step into the spotlight. Join Sindayaw to embark on a journey of passion, artistry, and excellence.</p>
+      </div>
+      <div id="sinag-section" class="content-section" style="display: none;">
+        <div style="display: flex; align-items: center;">
+          <img src="Sinag Glee.png" alt="SINAG GLEE Image" class="circle-image"> <!-- Added image -->
+          <h2 style="margin-left: 20px;">SINAG GLEE</h2>
+        </div>
+        <p>Sinag was established on August 19, 2023, with the belief that music has the power to bring people together and create lasting memories. As the official music ensemble of the PHINMA University of Iloilo Senior High School Department, Sinag serves as a platform for students to explore their musical talents, express their creativity, and develop a deep appreciation for music.</p>
+        <p>Our dedicated team of experienced instructors and passionate members is committed to guiding students through a wide range of musical genres, from classical to contemporary. Whether you are an experienced performer or just beginning your musical journey, Sinag provides an inclusive and nurturing environment where you can refine your skills, gain confidence, and grow as a musician.</p>
+        <p>Through performances, workshops, and collaborations, Sinag continues to inspire and unite the school community through the power of music. As we work together to create beautiful harmonies and unforgettable performances, we invite all aspiring musicians to join us in celebrating the art of music.</p>
+      </div>
+      <div id="history-section" class="content-section" style="display: none;">     
+        <div style="display: flex; align-items: center;">
+          <img src="col.png" alt="Council of Leaders Image" class="circle-image">
+          <h2>COUNCIL OF LEADERS</h2>
+        </div>
+        <p>The Council of Leaders is a dynamic student-led organization within the Senior High School (SHS) Department of PHINMA – University of Iloilo. For the past four years, it has been at the forefront of fostering leadership, collaboration, and student engagement. As the primary governing body representing senior high school students, it ensures their voices are heard and organizes impactful school-wide events and initiatives.</p>
+        <p>Founded by visionary educators Sir Czar Oneill Pamplona and Ma’am Lynie Aguirre, the Council of Leaders was created to provide a platform for student leaders to develop their skills, take on responsibilities, and contribute to a vibrant and inclusive school environment. Their collaboration led to the establishment of structured leadership programs, student-led projects, and various extracurricular activities that continue to shape the SHS community today.</p>
+        <p>Since its inception, the Council of Leaders has played a crucial role in planning and executing major school events, including academic competitions, leadership training sessions, outreach programs, and student engagement activities. It also serves as a bridge between students and faculty, addressing student concerns and promoting a culture of responsibility, teamwork, and excellence.</p>
+        <p>Over the years, the council has evolved, with each batch of student leaders bringing fresh ideas while upholding the core values established by its founders. Today, the Council of Leaders of the SHS Department of PHINMA – University of Iloilo remains a vital institution, continuously empowering students to develop their leadership potential and actively participate in shaping their school community.</p>
+      </div>
+      <div id="events-section" class="content-section" style="display: none;">
+        <div style="display: flex; align-items: center;">
+          <img src="col.png" alt="Council of Leaders Image" class="circle-image">
+          <h2>Council of Leaders</h2>
+        </div>
+        <div class="events-section">
+          <div class="event-item">
+            <div class="event-date">December 8, 2023</div>
+            <div class="event-description">The Wardrobe Gift Giving Drive of the SHS Students</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 9, 2022</div>
+            <div class="event-description">Christmas Arc Lightning in PHINMA University of Iloilo</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 23, 2023</div>
+            <div class="event-description">Grade 12 Christmas Party</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 26, 2024</div>
+            <div class="event-description">Tryouts for all Ball Games</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 2, 2024</div>
+            <div class="event-description">Tryouts for the 77th Foundation Day</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 9, 2024</div>
+            <div class="event-description">Clan Games in Basketball Men</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 16, 2024</div>
+            <div class="event-description">Punto por Punto Intern Clan Modern Oxford Oregon Debate Orientation and Workshop</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 28, 2024</div>
+            <div class="event-description">One Basic ED Days Chess Competition</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 28, 2024</div>
+            <div class="event-description">Quiz Mania Elimination</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">March 2, 2024</div>
+            <div class="event-description">Punto por Punto Debate Competition</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">March 12, 2024</div>
+            <div class="event-description">CHROMA NOVA - Clan Mascot</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">March 15, 2024</div>
+            <div class="event-description">One Basic Ed Days 2024 CHROMA INVASION</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">April 27, 2024</div>
+            <div class="event-description">Librosyonaryo: Phase 1</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">May 17, 2024</div>
+            <div class="event-description">Outtakes from Language Olympics 2023</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">June 5, 2024</div>
+            <div class="event-description">Recognition Day of Grade 11 Students</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">June 10, 2024</div>
+            <div class="event-description">Baccalaureate Mass</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">June 13, 2024</div>
+            <div class="event-description">PHINMA University of Iloilo 7th Senior High School Commencement Exercises</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">June 22, 2024</div>
+            <div class="event-description">Bayani Camp 2024: Leadership Training and Seminar</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">October 6, 2024</div>
+            <div class="event-description">Lead Camp Jr. - Leading with Purpose</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">November 7, 2024</div>
+            <div class="event-description">Language Olympics Spoken Word and Poetry</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">November 14, 2024</div>
+            <div class="event-description">Language Olympics</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 10, 2024</div>
+            <div class="event-description">Capture the Spirit of Giving</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 19, 2024</div>
+            <div class="event-description">The Twelve’s Christmas Party 2024 is the best in class picture</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 22, 2024</div>
+            <div class="event-description">Sleighing through: A Merry Christmas Party</div>
+          </div>
+          <div class="event-item">
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 22 2024</div>
+            <div class="event-description">Sleighing through: Rampa Twelve's Rampa</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 22, 2024</div>
+            <div class="event-description">Family and Feast</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 19, 2024</div>
+            <div class="event-description">Sleighing through: Dance! Laugh! Perform</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 14, 2025</div>
+            <div class="event-description">The Preparation for the Real Battle</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 15, 2025</div>
+            <div class="event-description">Game Face on for Ethereal Tyrants</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 17, 2025</div>
+            <div class="event-description">Trials for Raging Alchemists</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 18, 2025</div>
+            <div class="event-description">Tryouts of Luminous Seekers</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 1, 20255</div>
+            <div class="event-description">Illuminating Victory of Luminous Seekers</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 15, 2025</div>
+            <div class="event-description">Game Face on for Ethereal Tyrants</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 17, 2025</div>
+            <div class="event-description">Trials for Raging Alchemists</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 18, 2025</div>
+            <div class="event-description">Tryouts of Luminous Seekers</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 23, 2025</div>
+            <div class="event-description">Punto por Punto in Celebration of One Basic Ed Days</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 1, 2025</div>
+            <div class="event-description">Illuminating Victory of Luminous Seekers</div>
+          </div>
+          <select class="event-dropdown" onchange="showSection(this.value)">
+            <option value="" disabled selected>Select Organization Events</option>
+            <option value="col-events-section">Council of Leaders </option>
+            <option value="smhap-events-section">SMHAP </option>
+            <option value="scimat-events-section">SCIMATH </option>
+            <option value="bus-cata-events-section">BUSINESS CATALYST</option>
+            <option value="scaena-events-section">SCAENA EXCELSIOR</option>
+            <option value="sinda-events-section">SINDAYAW</option>
+            <option value="sinag-events-section">SINAG GLEE</option>
+          </select>
+        </div>
+      </div>
+      <div id="col-events-section" class="content-section" style="display: none;">
+          <button class="back-button" onclick="showSection('events-section')">Back to Events</button>
+        <div style="display: flex; align-items: center;">
+          <img src="col.png" alt="Council of Leaders Image" class="circle-image">
+          <h2>Council of Leaders</h2>
+        </div>
+        <div class="events-section">
+          <div class="event-item">
+            <div class="event-date">December 8, 2023</div>
+            <div class="event-description">The Wardrobe Gift Giving Drive of the SHS Students</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 9, 2022</div>
+            <div class="event-description">Christmas Arc Lightning in PHINMA University of Iloilo</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 23, 2023</div>
+            <div class="event-description">Grade 12 Christmas Party</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 26, 2024</div>
+            <div class="event-description">Tryouts for all Ball Games</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 2, 2024</div>
+            <div class="event-description">Tryouts for the 77th Foundation Day</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 9, 2024</div>
+            <div class="event-description">Clan Games in Basketball Men</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 16, 2024</div>
+            <div class="event-description">Punto por Punto Intern Clan Modern Oxford Oregon Debate Orientation and Workshop</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 28, 2024</div>
+            <div class="event-description">One Basic ED Days Chess Competition</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 28, 2024</div>
+            <div class="event-description">Quiz Mania Elimination</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">March 2, 2024</div>
+            <div class="event-description">Punto por Punto Debate Competition</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">March 12, 2024</div>
+            <div class="event-description">CHROMA NOVA - Clan Mascot</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">March 15, 2024</div>
+            <div class="event-description">One Basic Ed Days 2024 CHROMA INVASION</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">April 27, 2024</div>
+            <div class="event-description">Librosyonaryo: Phase 1</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">May 17, 2024</div>
+            <div class="event-description">Outtakes from Language Olympics 2023</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">June 5, 2024</div>
+            <div class="event-description">Recognition Day of Grade 11 Students</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">June 10, 2024</div>
+            <div class="event-description">Baccalaureate Mass</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">June 13, 2024</div>
+            <div class="event-description">PHINMA University of Iloilo 7th Senior High School Commencement Exercises</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">June 22, 2024</div>
+            <div class="event-description">Bayani Camp 2024: Leadership Training and Seminar</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">October 6, 2024</div>
+            <div class="event-description">Lead Camp Jr. - Leading with Purpose</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">November 7, 2024</div>
+            <div class="event-description">Language Olympics Spoken Word and Poetry</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">November 14, 2024</div>
+            <div class="event-description">Language Olympics</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 10, 2024</div>
+            <div class="event-description">Capture the Spirit of Giving</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 19, 2024</div>
+            <div class="event-description">The Twelve’s Christmas Party 2024 is the best in class picture</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 22, 2024</div>
+            <div class="event-description">Sleighing through: A Merry Christmas Party</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 22, 2024</div>
+            <div class="event-description">Sleighing through: Rampa Twelve’s Rampa</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 22, 2024</div>
+            <div class="event-description">Family and Feast</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 22, 2024</div>
+            <div class="event-description">Sleighing through: Dance! Laugh! Perform</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 14, 2025</div>
+            <div class="event-description">The Preparation for the Real Battle</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 15, 2025</div>
+            <div class="event-description">Game Face on for Ethereal Tyrants</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 17, 2025</div>
+            <div class="event-description">Trials for Raging Alchemists</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 18, 2025</div>
+            <div class="event-description">Tryouts of Luminous Seekers</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 23, 2025</div>
+            <div class="event-description">Punto por Punto in Celebration of One Basic Ed Days</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 1, 2025</div>
+            <div class="event-description">Illuminating Victory of Luminous Seekers</div>
+          </div>
+        </div>
+        <select class="event-dropdown" onchange="showSection(this.value)">
+          <option value="" disabled selected>Select Organization Events</option>
+          <option value="events-section">Back to Events</option>
+          <option value="col-events-section">Council of Leaders </option>
+          <option value="smhap-events-section">SMHAP </option>
+          <option value="scimat-events-section">SCIMATH </option>
+          <option value="bus-cata-events-section">BUSINESS CATALYST </option>
+          <option value="scaena-events-section">SCAENA EXCELSIOR </option>
+          <option value="sinda-events-section">SINDAYAW </option>
+          <option value="sinag-events-section">SINAG GLEE </option>
+        </select>
+      </div>
+      <div id="smhap-events-section" class="content-section" style="display: none;">
+        <button class="back-button" onclick="showSection('events-section')">Back to Events</button>
+        <div style="display: flex; align-items: center;">
+          <img src="SMHAP.png" alt="SMHAP Image" class="circle-image">
+          <h2>SMHAP</h2>
+        </div>
+        <div class="events-section">
+          <div class="event-item">
+            <div class="event-date">August 7, 2023</div>
+            <div class="event-description">Welcome Ceremony for TVL and GAS Students</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">November 5, 2023</div>
+            <div class="event-description">PHINMA - UNIVERSITY OF ILOILO MODEL UNITED NATION</div>
+          </div>
+        </div>
+        <select class="event-dropdown" onchange="showSection(this.value)">
+          <option value="" disabled selected>Select Organization Events</option>
+          <option value="events-section">Back to Events</option>
+          <option value="col-events-section">Council of Leaders </option>
+          <option value="scimat-events-section">SCIMATH </option>
+          <option value="bus-cata-events-section">BUSINESS CATALYST </option>
+          <option value="scaena-events-section">SCAENA EXCELSIOR </option>
+          <option value="sinda-events-section">SINDAYAW </option>
+          <option value="sinag-events-section">SINAG GLEE </option>
+        </select>
+      </div>
+      <div id="scimat-events-section" class="content-section" style="display: none;">
+        <button class="back-button" onclick="showSection('events-section')">Back to Events</button>
+        <div style="display: flex; align-items: center;">
+          <img src="sci-math.png" alt="SCIMATH Image" class="circle-image">
+          <h2>SCIMATH</h2>
+        </div>
+        <div class="events-section">
+          <div class="event-item">
+            <div class="event-date">September 1, 2023</div>
+            <div class="event-description">"Pioneering Boundaries: Igniting the Sci-Math Community's Vision for the Future!"</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">September 2, 2023</div>
+            <div class="event-description">First-ever meeting of the Sci-Math Community Officers</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">September 8, 2023</div>
+            <div class="event-description">Gathering once more, the brilliant minds of our Sci-Math Community officers converged in their second meeting</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">September 28, 2023</div>
+            <div class="event-description">Collaborate with our excited participants as we head off on a grand trip via math and science. The journey has begun!</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">October 1, 2023</div>
+            <div class="event-description">[PART 1] The Sci-Math Camp was a transformative experience that combined knowledge, adventure, and camaraderie.</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">October 1, 2023</div>
+            <div class="event-description">[PART 2] During Sci-Math Camp, campers had an extraordinary opportunity to witness the beauty of the moon, the majesty of Jupiter, and the brilliance of the stars.</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">October 28, 2023</div>
+            <div class="event-description">SCIENCE FAIR 2023</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 10, 2024</div>
+            <div class="event-description">THE SNAKES WILL ALWAYS BITE BACK</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 28, 2024</div>
+            <div class="event-description">It is a battle between brains!</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 8, 2025</div>
+            <div class="event-description">Leveling up our STEM skills at Sci-Math Camp 2025. Sci-Math Camp '25 was a blast!</div>
+          </div>
+        </div>
+        <select class="event-dropdown" onchange="showSection(this.value)">
+          <option value="" disabled selected>Select Organization Events</option>
+          <option value="events-section">Back to Events</option>
+          <option value="col-events-section">Council of Leaders</option>
+          <option value="smhap-events-section">SMHAP</option>
+          <option value="bus-cata-events-section">BUSINESS CATALYST</option>
+          <option value="scaena-events-section">SCAENA EXCELSIOR</option>
+          <option value="sinda-events-section">SINDAYAW</option>
+          <option value="sinag-events-section">SINAG GLEE</option>
+        </select>
+      </div>
+      <div id="bus-cata-events-section" class="content-section" style="display: none;">
+        <button class="back-button" onclick="showSection('events-section')">Back to Events</button>
+        <select class="event-dropdown" onchange="showSection(this.value)">
+          <option value="" disabled selected>Select Organization Events</option>
+          <option value="events-section">Back to Events</option>
+          <option value="col-events-section">Council of Leaders</option>
+          <option value="smhap-events-section">SMHAP</option>
+          <option value="scimat-events-section">SCIMATH</option>
+          <option value="scaena-events-section">SCAENA EXCELSIOR</option>
+          <option value="sinda-events-section">SINDAYAW</option>
+          <option value="sinag-events-section">SINAG GLEE</option>
+        </select>
+        <div style="display: flex; align-items: center;">
+          <img src="Business Catalyst.png" alt="BUSINESS CATALYST Image" class="circle-image">
+          <h2>BUSINESS CATALYST</h2>
+        </div>
+        <div class="events-section">
+          <div class="event-item">
+            <div class="event-date">August 11, 2023</div>
+            <div class="event-description">ABM & TVL Cookery A fund-raising initiative for Council of Leaders</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">September 20, 2023</div>
+            <div class="event-description">Exploring Real-World Finance</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">October 29, 2023</div>
+            <div class="event-description">A Showcase of Creatives, Editing Skills, and Innovative Ideas: ABM Excellencia Fest - PPMC Entries</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">November 26, 2023</div>
+            <div class="event-description">Language Olympics Takeaways: The Scorching Phoenix of ABM</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">November 30, 2023</div>
+            <div class="event-description">Business Catalyst Booth: Customer Snippets</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 24, 2023</div>
+            <div class="event-description">A December to Remember: The Year End Celebration of Grade 12 PUI-SHS Students</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 17, 2024</div>
+            <div class="event-description">Think and Grow Rich: A JIFEX Financial Literacy Symposium for Grade 12 ABM Students</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 22, 2024</div>
+            <div class="event-description">Full of Flavor, Full of Possibilities: A UPV-MSI Why Marketing Roadshow for Grade 11 ABM Students</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 30, 2024</div>
+            <div class="event-description">Test of Talents, Skills and Abilities: OBE Days tryout of the Accountancy, Business and Managements Strand(ABM)</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 2, 2024</div>
+            <div class="event-description">Conquered Battles: ABM Twelve’s and Eleven’s survive their respective exams</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 10, 2024</div>
+            <div class="event-description">#YellowGators In Action: OBE Day 1 Snippets</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 12, 2024</div>
+            <div class="event-description">OBE Days Day 2: YellowGators Journey to the TOP</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 13, 2024</div>
+            <div class="event-description">Craving for coffee? Streetfoods? Or are you looking for activities that is familiar yet unique at the same time?</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">February 20, 2024</div>
+            <div class="event-description">Embark on Business-Product Innovation: Product Expo 2024 Food Tasting</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">March 18, 2024</div>
+            <div class="event-description">ANI: Bugana nga Ani, Bunga sang Pagpangabudlay</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">August 1, 2024</div>
+            <div class="event-description">Day 1 of Safe Space Event: Business Catalyst Booth Recap</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">August 11, 2024</div>
+            <div class="event-description">Day 2 of the Safe Space Event: The Business Catalysts Booth</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">August 31, 2024</div>
+            <div class="event-description">The Business Catalysts Organization Kicks Off with a Successful First Meeting</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">November 7, 2024</div>
+            <div class="event-description">The Grade 11 House of Slayers and House of Nemertes(ABM) Thrived at yesterday’s Language Olympics</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">November 8, 2024</div>
+            <div class="event-description">Language Olympics Event: The Business Catalysts Booth</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 6, 2024</div>
+            <div class="event-description">The ABM Twelve’s Successful Deliver Their Marketing Acceptance Survey Results Presentation</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 12, 2024</div>
+            <div class="event-description">A Heartfelt Christmas Tribute to our Security and Maintenance Support Group</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 22, 2024</div>
+            <div class="event-description">SLEIGHING THROUGH: The ABM Twelve’s Christmas Party 2024</div>
+          </div>
+        </div>
+      </div>
+      <div id="scaena-events-section" class="content-section" style="display: none;">
+        <button class="back-button" onclick="showSection('events-section')">Back to Events</button>
+        <select class="event-dropdown" onchange="showSection(this.value)">
+          <option value="" disabled selected>Back to Events</option>
+          <option value="events-section">All Events</option>
+          <option value="col-events-section">Council of Leaders</option>
+          <option value="smhap-events-section">SMHAP </option>
+          <option value="scimat-events-section">SCIMATH </option>
+          <option value="bus-cata-events-section">BUSINESS CATALYST</option>
+          <option value="sinda-events-section">SINDAYAW </option>
+          <option value="sinag-events-section">SINAG GLEE </option>
+        </select>
+        <div style="display: flex; align-items: center;">
+          <img src="Scaena Excelsior.png" alt="SCAENA EXCELSIOR Image" class="circle-image">
+          <h2>SCAENA EXCELSIOR</h2>
+        </div>
+        <div class="events-section">
+          <div class="event-item">
+            <div class="event-date">August 10, 2023</div>
+            <div class="event-description">Day 1, shift A XI from stem & abm</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">August 14, 2023</div>
+            <div class="event-description">The pinnacle & Scaena Excelsio</div>
+          </div>
+        </div>
+        <select class="event-dropdown" onchange="showSection(this.value)">
+          <option value="" disabled selected>Select Organization Events</option>
+          <option value="events-section">Back to Events</option>
+          <option value="col-events-section">Council of Leaders </option>
+          <option value="smhap-events-section">SMHAP</option>
+          <option value="scimat-events-section">SCIMATH</option>
+          <option value="bus-cata-events-section">BUSINESS CATALYST</option>
+          <option value="sinda-events-section">SINDAYAW</option>
+          <option value="sinag-events-section">SINAG GLEE</option>
+        </select>
+      </div>
+      <div id="sinda-events-section" class="content-section" style="display: none;">
+        <button class="back-button" onclick="showSection('events-section')">Back to Events</button>
+        <select class="event-dropdown" onchange="showSection(this.value)">
+          <option value="" disabled selected>Back to Events</option>
+          <option value="events-section">All Events</option>
+          <option value="col-events-section">Council of Leaders </option>
+          <option value="smhap-events-section">SMHAP </option>
+          <option value="scimat-events-section">SCIMATH </option>
+          <option value="bus-cata-events-section">BUSINESS CATALYST </option>
+          <option value="scaena-events-section">SCAENA EXCELSIOR </option>
+          <option value="sinag-events-section">SINAG GLEE </option>
+        </select>
+        <div style="display: flex; align-items: center;">
+          <img src="Sindayaw.png" alt="SINDAYAW Image" class="circle-image">
+          <h2>SINDAYAW</h2>
+        </div>
+        <div class="events-section">
+          <!-- Add SINDAYAW events here -->
+          <div class="event-item">
+            <div class="event-date">September 15, 2023</div>
+            <div class="event-description">“Dance is the hidden language of the soul.”</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">November 21, 2023</div>
+            <div class="event-description">Sindayaw Dance Troupe’s intermission number during the culminating activity in PE for Grade 11.</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">January 14, 2024</div>
+            <div class="event-description">7teen of the Sindayaw Dance Troupe 3rd place in the SMDI Honda Delgado Dance</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">April 25, 2024</div>
+            <div class="event-description">The STEM x GAS performed their winning piece during OBE Days in Grade 11, Culminating in Personal Development</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">August 6, 8, 13, and 15 2024</div>
+            <div class="event-description">Sindayaw Dance Troupe Auditions</div>
+          </div>
+        </div>
+        <select class="event-dropdown" onchange="showSection(this.value)">
+          <option value="" disabled selected>Select Organization Events</option>
+          <option value="events-section">Back to Events</option>
+          <option value="col-events-section">Council of Leaders </option>
+          <option value="smhap-events-section">SMHAP</option>
+          <option value="scimat-events-section">SCIMATH</option>
+          <option value="bus-cata-events-section">BUSINESS CATALYST</option>
+          <option value="scaena-events-section">SCAENA EXCELSIOR</option>
+          <option value="sinag-events-section">SINAG GLEE</option>
+        </select>
+      </div>
+      <div id="sinag-events-section" class="content-section" style="display: none;">
+        <button class="back-button" onclick="showSection('events-section')">Back to Events</button>
+        <select class="event-dropdown" onchange="showSection(this.value)">
+          <option value="" disabled selected>Back to Events</option>
+          <option value="events-section">All Events</option>
+          <option value="col-events-section">Council of Leaders</option>
+          <option value="smhap-events-section">SMHAP </option>
+          <option value="scimat-events-section">SCIMATH </option>
+          <option value="bus-cata-events-section">BUSINESS CATALYST </option>
+          <option value="scaena-events-section">SCAENA EXCELSIOR </option>
+          <option value="sinda-events-section">SINDAYAW </option>
+        </select>
+        <div style="display: flex; align-items: center;">
+          <img src="Sinag Glee.png" alt="SINAG GLEE Image" class="circle-image">
+          <h2>SINAG GLEE</h2>
+        </div>
+        <div class="events-section">
+          <div class="event-item">
+            <div class="event-date">September 7, 2023</div>
+            <div class="event-description">The Sinag club audition</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">December 13, 2023</div>
+            <div class="event-description">"Musika ng Ating Pasko"</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">August 13, 2024</div>
+            <div class="event-description">The Sinag Club is pleased to inform you that we will held an auditions for you to Show your singing and music talents!</div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">September 25, 2024</div>
+            <div class="event-description">The Sinag Club will hold an official Club meeting on October 04, 2024.</div>
+          </div>
+        </div>
+        <select class="event-dropdown" onchange="showSection(this.value)">
+          <option value="" disabled selected>Select Organization Events</option>
+          <option value="events-section">Back to Events</option>
+          <option value="col-events-section">Council of Leaders</option>
+        </select>
+      </div>
+      <div id="about-us-section" class="content-section" style="display: none;">
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; padding: 20px; background-color: #f5f5f5; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+          <p>From the section of FA1-TVL-PROG12-1, a dedicated group of senior high school students from the Technical-Vocational-Livelihood (TVL) strand focused in ICT at PHINMA – University of Iloilo. As part of our ICT 002 - Culminating in Programming subject, we developed an informative website tailored for the Senior High School Department of our university.</p>
+          <p>This project is an experimental study that showcases our skills in web development and information dissemination. With the unity and cooperation of Group 4, we successfully created this platform to enhance accessibility and provide essential information to students and faculty. Our website serves as a testament to our dedication, teamwork, and passion for technology.</p>
+        </div>
+      </div>
+      <div id="link-section" class="content-section" style="display: none;">
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-around;">
+          <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
+            <img src="col.png" alt="Conclave Image" class="circle-image" style="width: 100px; height: 100px;">
+            <h2 style="font-size: 1rem; margin: 10px 0;">The Conclave</h2>
+            <a href="https://www.facebook.com/profile.php?id=100088238270142&rdid=iyZPk7bVH0YLWzHu&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F157huXdBwu%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Visit Facebook Page
+            </a>
+          </div>
+          <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
+            <img src="smhap.png" alt="SMHAP Image" class="circle-image" style="width: 100px; height: 100px;">
+            <h2 style="font-size: 1rem; margin: 10px 0;">SMHAP-Humanista</h2>
+            <a href="https://www.facebook.com/profile.php?id=100095568489304&rdid=ozze6kZXdFlrCv8I&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15rS5trz1m%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Visit Facebook Page
+            </a>
+          </div>
+          <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
+            <img src="sci-math.png" alt="Sci-Math Community Image" class="circle-image" style="width: 100px; height: 100px;">
+            <h2 style="font-size: 1rem; margin: 10px 0;">Sci-Math</h2>
+            <a href="https://www.facebook.com/profile.php?id=100095537082950&rdid=ljWtqypu9LPxWTZI&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15iPqwwXR5%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Visit Facebook Page
+            </a>
+          </div>
+          <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
+            <img src="Scaena Excelsior.png" alt="Scaena Excelsior Image" class="circle-image" style="width: 100px; height: 100px;">
+            <h2 style="font-size: 1rem; margin: 10px 0;">Scaena Excelsior</h2>
+            <a href="https://www.facebook.com/profile.php?id=100095529673474&rdid=ybnlyiUebROCRBC0&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F164VpRtCMV%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Visit Facebook Page
+            </a>
+          </div>
+          <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
+            <img src="Sinag Glee.png" alt="SINAG Image" class="circle-image" style="width: 100px; height: 100px;">
+            <h2 style="font-size: 1rem; margin: 10px 0;">SINAG</h2>
+            <a href="https://www.facebook.com/profile.php?id=61550190967331&rdid=Wo01puZZCnMKZ6pv&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17vpHHNnVm%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Visit Facebook Page
+            </a>
+          </div>
+          <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
+            <img src="sindayaw.png" alt="Sindayaw Image" class="circle-image" style="width: 100px; height: 100px;">
+            <h2 style="font-size: 1rem; margin: 10px 0;">Sindayaw</h2>
+            <a href="https://www.facebook.com/profile.php?id=61550670052071&rdid=fjpg7rYUOXYa2WZU&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1YpHvjopqs%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Visit Facebook Page
+            </a>
+          </div>
+          <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
+            <img src="Business Catalyst.png" alt="Business Catalyst Image" class="circle-image" style="width: 100px; height: 100px;">
+            <h2 style="font-size: 1rem; margin: 10px 0;">Business Catalysts</h2>
+            <a href="https://www.facebook.com/profile.php?id=100095471972929&rdid=Hah0oCfTWK7zIsyL&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BDyTgZsDy%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Visit Facebook Page
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 University Of IloIlo. All rights reserved</p>
+  </footer>
+</body>
+</html>
