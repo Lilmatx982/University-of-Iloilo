@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organization Registration</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .registration-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    .registration-container h1 {
+      text-align: center;
+      color: #2f4f2f;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus, .form-group select:focus {
+      border-color: #2f4f2f;
+      outline: none;
+    }
+    .submit-button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2f4f2f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    .submit-button:hover {
+      background-color: #3e6b3e;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #2f4f2f;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .back-link:hover {
+      color: #3e6b3e;
+    }
+  </style>
+</head>
+<body>
+  <div class="registration-container">
+    <h1>Register</h1>
+    <h2 id="organization-name" style="text-align: center; color: #555; margin-bottom: 20px;"></h2>
+    <form id="registration-form" action="https://formsubmit.co/0afab025a7543f66b89f2fbea480f90b" method="POST" onsubmit="handleSubmit(event)">
+      <input type="hidden" id="organization" name="organization">
+      <div class="form-group">
+        <label for="school-id">School ID</label>
+        <input type="number" id="school-id" name="school_id" placeholder="Enter your School ID" required>
+      </div>
+      <div class="form-group">
+        <label for="full-name">Full Name</label>
+        <input type="text" id="full-name" name="full_name" placeholder="Enter your Full Name" required>
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" placeholder="Enter your Age" required>
+      </div>
+      <div class="form-group">
+        <label for="birthday">Birthday</label>
+        <input type="date" id="birthday" name="birthday" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your Email" required>
+      </div>
+      <div class="form-group">
+        <label for="strand">Strand</label>
+        <select id="strand" name="strand" required>
+          <option value="" disabled selected>Select your Strand</option>
+          <option value="STEM">STEM</option>
+          <option value="ABM">ABM</option>
+          <option value="HUMSS">HUMSS</option>
+          <option value="TVL">TVL</option>
+          <option value="GAS">GAS</option>
+        </select>
+      </div>
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+    <a href="main.html" class="back-link">Back to home</a>
+  </div> 
+  <div id="confirmation-message" style="position: fixed; top: 10px; left: 10px; background-color: #2f4f2f; color: white; padding: 10px; border-radius: 5px; display: none; align-items: center; gap: 10px;">
+    <span style="font-size: 1.5rem;">✔</span> You are now registered.
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const organization = params.get('organization');
+    if (organization) {
+      document.getElementById('organization-name').textContent = `Registering for: ${organization}`;
+      document.getElementById('organization').value = organization;
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault(); // Prevent form submission
+      const confirmationMessage = document.getElementById('confirmation-message');
+      confirmationMessage.style.display = 'flex';
+      setTimeout(() => {
+        confirmationMessage.style.display = 'none';
+      }, 5000);
+      document.getElementById('registration-form').submit(); // Submit the form after showing the message
+    }
+  </script>
+</body>
+</html>
