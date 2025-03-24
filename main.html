@@ -361,6 +361,14 @@
       document.querySelectorAll('.event-dropdown').forEach(dropdown => {
         dropdown.style.display = 'block';
       });
+
+      
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebar.classList.contains('visible')) {
+        sidebar.classList.remove('visible');
+        const showButton = document.querySelector('.show-sidebar-btn');
+        showButton.style.display = 'block';
+      }
     }
 
     function toggleSidebar() {
@@ -438,6 +446,7 @@
     <button onclick="showSection('events-section')">Events</button>
     <button onclick="showSection('about-us-section')">About Us</button>
     <button onclick="showSection('link-section')">Page Organization</button>  
+    <button onclick="showSection('instructions-section')">Step-by-Step Instructions</button>
     <button onclick="window.location.href='login.html'">Logout</button>
     
   </aside>
@@ -1135,11 +1144,6 @@
           <option value="" disabled selected>Back to Events</option>
           <option value="events-section">All Events</option>
           <option value="col-events-section">Council of Leaders</option>
-          <option value="smhap-events-section">SMHAP </option>
-          <option value="scimat-events-section">SCIMATH </option>
-          <option value="bus-cata-events-section">BUSINESS CATALYST </option>
-          <option value="scaena-events-section">SCAENA EXCELSIOR </option>
-          <option value="sinda-events-section">SINDAYAW </option>
         </select>
         <div style="display: flex; align-items: center;">
           <img src="Sinag Glee.png" alt="SINAG GLEE Image" class="circle-image">
@@ -1178,55 +1182,79 @@
       <div id="link-section" class="content-section" style="display: none;">
         <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-around;">
           <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
-            <img src="col.png" alt="Conclave Image" class="circle-image" style="width: 100px; height: 100px;">
+            <a href="https://www.facebook.com/profile.php?id=100088238270142&rdid=iyZPk7bVH0YLWzHu&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F157huXdBwu%2F#" target="_blank" style="text-decoration: none;">
+              <img src="col.png" alt="Conclave Image" class="circle-image" style="width: 100px; height: 100px; transition: transform 0.3s;">
+            </a>
             <h2 style="font-size: 1rem; margin: 10px 0;">The Conclave</h2>
-            <a href="https://www.facebook.com/profile.php?id=100088238270142&rdid=iyZPk7bVH0YLWzHu&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F157huXdBwu%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
-              Visit Facebook Page
+            <a href="register.html?organization=The Conclave" style="margin-top: 10px; padding: 5px 10px; background-color: #3e6b3e; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Register for Organization
             </a>
           </div>
           <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
-            <img src="SMHAP.png" alt="SMHAP Image" class="circle-image" style="width: 100px; height: 100px;">
+            <a href="https://www.facebook.com/profile.php?id=100095568489304&rdid=ozze6kZXdFlrCv8I&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15rS5trz1m%2F#" target="_blank" style="text-decoration: none;">
+              <img src="smhap.png" alt="SMHAP Image" class="circle-image" style="width: 100px; height: 100px; transition: transform 0.3s;">
+            </a>
             <h2 style="font-size: 1rem; margin: 10px 0;">SMHAP-Humanista</h2>
-            <a href="https://www.facebook.com/profile.php?id=100095568489304&rdid=ozze6kZXdFlrCv8I&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15rS5trz1m%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
-              Visit Facebook Page
+            <a href="register.html?organization=SMHAP-Humanista" style="margin-top: 10px; padding: 5px 10px; background-color: #3e6b3e; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Register for Organization
             </a>
           </div>
           <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
-            <img src="sci-math.png" alt="Sci-Math Community Image" class="circle-image" style="width: 100px; height: 100px;">
+            <a href="https://www.facebook.com/profile.php?id=100095537082950&rdid=ljWtqypu9LPxWTZI&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15iPqwwXR5%2F#" target="_blank" style="text-decoration: none;">
+              <img src="sci-math.png" alt="Sci-Math Community Image" class="circle-image" style="width: 100px; height: 100px; transition: transform 0.3s;">
+            </a>
             <h2 style="font-size: 1rem; margin: 10px 0;">Sci-Math</h2>
-            <a href="https://www.facebook.com/profile.php?id=100095537082950&rdid=ljWtqypu9LPxWTZI&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15iPqwwXR5%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
-              Visit Facebook Page
+            <a href="register.html?organization=Sci-Math" style="margin-top: 10px; padding: 5px 10px; background-color: #3e6b3e; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Register for Organization
             </a>
           </div>
           <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
-            <img src="Scaena Excelsior.png" alt="Scaena Excelsior Image" class="circle-image" style="width: 100px; height: 100px;">
+            <a href="https://www.facebook.com/profile.php?id=100095529673474&rdid=ybnlyiUebROCRBC0&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F164VpRtCMV%2F#" target="_blank" style="text-decoration: none;">
+              <img src="Scaena Excelsior.png" alt="Scaena Excelsior Image" class="circle-image" style="width: 100px; height: 100px; transition: transform 0.3s;">
+            </a>
             <h2 style="font-size: 1rem; margin: 10px 0;">Scaena Excelsior</h2>
-            <a href="https://www.facebook.com/profile.php?id=100095529673474&rdid=ybnlyiUebROCRBC0&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F164VpRtCMV%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
-              Visit Facebook Page
+            <a href="register.html?organization=Scaena Excelsior" style="margin-top: 10px; padding: 5px 10px; background-color: #3e6b3e; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Register for Organization
             </a>
           </div>
           <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
-            <img src="Sinag Glee.png" alt="SINAG Image" class="circle-image" style="width: 100px; height: 100px;">
+            <a href="https://www.facebook.com/profile.php?id=61550190967331&rdid=Wo01puZZCnMKZ6pv&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17vpHHNnVm%2F#" target="_blank" style="text-decoration: none;">
+              <img src="Sinag Glee.png" alt="SINAG Image" class="circle-image" style="width: 100px; height: 100px; transition: transform 0.3s;">
+            </a>
             <h2 style="font-size: 1rem; margin: 10px 0;">SINAG</h2>
-            <a href="https://www.facebook.com/profile.php?id=61550190967331&rdid=Wo01puZZCnMKZ6pv&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17vpHHNnVm%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
-              Visit Facebook Page
+            <a href="register.html?organization=SINAG" style="margin-top: 10px; padding: 5px 10px; background-color: #3e6b3e; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Register for Organization
             </a>
           </div>
           <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
-            <img src="Sindayaw.png" alt="Sindayaw Image" class="circle-image" style="width: 100px; height: 100px;">
+            <a href="https://www.facebook.com/profile.php?id=61550670052071&rdid=fjpg7rYUOXYa2WZU&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1YpHvjopqs%2F#" target="_blank" style="text-decoration: none;">
+              <img src="Sindayaw.png" alt="Sindayaw Image" class="circle-image" style="width: 100px; height: 100px; transition: transform 0.3s;">
+            </a>
             <h2 style="font-size: 1rem; margin: 10px 0;">Sindayaw</h2>
-            <a href="https://www.facebook.com/profile.php?id=61550670052071&rdid=fjpg7rYUOXYa2WZU&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1YpHvjopqs%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
-              Visit Facebook Page
+            <a href="register.html?organization=Sindayaw" style="margin-top: 10px; padding: 5px 10px; background-color: #3e6b3e; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Register for Organization
             </a>
           </div>
           <div style="display: flex; align-items: center; flex-direction: column; text-align: center; width: 150px;">
-            <img src="Business Catalyst.png" alt="Business Catalyst Image" class="circle-image" style="width: 100px; height: 100px;">
+            <a href="https://www.facebook.com/profile.php?id=100095471972929&rdid=Hah0oCfTWK7zIsyL&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BDyTgZsDy%2F#" target="_blank" style="text-decoration: none;">
+              <img src="Business Catalyst.png" alt="Business Catalyst Image" class="circle-image" style="width: 100px; height: 100px; transition: transform 0.3s;">
+            </a>
             <h2 style="font-size: 1rem; margin: 10px 0;">Business Catalysts</h2>
-            <a href="https://www.facebook.com/profile.php?id=100095471972929&rdid=Hah0oCfTWK7zIsyL&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BDyTgZsDy%2F#" target="_blank" style="padding: 5px 10px; background-color: #2f4f2f; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
-              Visit Facebook Page
+            <a href="register.html?organization=Business Catalysts" style="margin-top: 10px; padding: 5px 10px; background-color: #3e6b3e; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s, box-shadow 0.3s;">
+              Register for Organization
             </a>
           </div>
         </div>
+      </div>
+      <div id="instructions-section" class="content-section" style="display: none;">
+        <h2>Step-by-Step Instructions</h2>
+        <ol style="line-height: 1.8; margin-top: 20px;">
+          <li>Navigate to the "Page Organization" section from the sidebar menu.</li>
+          <li>Click on the logo of the organization you are interested in. This will redirect you to their official Facebook page.</li>
+          <li>To register for the organization, click the "Register for Organization" button below the logo.</li>
+          <li>Fill out the registration form on the next page and submit your details.</li>
+          <li>Wait for confirmation from the organization regarding your registration.</li>
+        </ol>
       </div>
     </main>
   </div>
